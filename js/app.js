@@ -12,8 +12,6 @@
                 
             this.ctx.lineTo(x,y);
             this.ctx.stroke();
-            
-            
         },
 
         disableDrawing: function(){
@@ -97,6 +95,11 @@
 
         },
 
+        clearCanvas: function(){
+
+            this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
+        },
+
         init: function() {
 
             this.con = document.querySelector('#sketchpad');
@@ -106,6 +109,9 @@
             this.colors = this.con.querySelectorAll('.colors div');
             this.range = this.con.querySelector('input[type="range"]');
             this.rangeOutput = this.con.querySelector('output strong');
+
+            this.clearBtn = this.con.querySelector('#clear');
+            this.clearBtn.onclick = this.clearCanvas.bind(this);
 
             this.setupSidebar();
             this.setupCanvas();
