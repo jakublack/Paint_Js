@@ -6,15 +6,23 @@
         drawLines: function(e){
 
             if(!this.mouseDown) return;
+
+            var x = this.getX(e),
+                y = this.getY(e);
+                
+            this.ctx.lineTo(x,y);
+            this.ctx.stroke();
             
-            console.log(e)
+            
         },
 
         disableDrawing: function(){
             this.mouseDown = false;
         },
-        enableDrawing:function(){
+        enableDrawing:function(e){
             this.mouseDown = true;
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.getX(e),this.getY(e));
         },
 
         changePenColor: function(e) {
@@ -23,6 +31,27 @@
 
             this.ctx.strokeStyle = e.target.dataset.color;
 
+        },
+
+        getX: function(e){
+
+            var position = this.canvas.getBoundingClientRect();
+
+            if(e.offsetX){
+                return e.offsetX;
+            } else if(e.clientX) {
+                return e.clientX - position.left;
+            }
+        },
+        getY: function(e){
+
+            var position = this.canvas.getBoundingClientRect();
+
+            if(e.offsetY){
+                return e.offsetY;
+            } else if(e.clientY) {
+                return e.clientY - position.top;
+            }
         },
 
         changePenSize: function(penSize){
