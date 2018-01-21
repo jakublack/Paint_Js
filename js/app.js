@@ -100,6 +100,15 @@
             this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
         },
 
+        saveImg: function(){
+
+            var img = new Image();
+            img.src = this.canvas.toDataURL("image/png");
+
+            this.con.appendChild(img)
+
+        },
+
         init: function() {
 
             this.con = document.querySelector('#sketchpad');
@@ -112,6 +121,9 @@
 
             this.clearBtn = this.con.querySelector('#clear');
             this.clearBtn.onclick = this.clearCanvas.bind(this);
+
+            this.saveBtn = this.con.querySelector('#save');
+            this.saveBtn.onclick = this.saveImg.bind(this);
 
             this.setupSidebar();
             this.setupCanvas();
